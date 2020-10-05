@@ -6,9 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int y = scan.nextInt(), x = scan.nextInt();;
-        int[][] m = new int[y][x];
-        fillMatrix3(m);
+        int x = scan.nextInt();
+        int[][] m = new int[2 * x + 1][2 * x + 1];
+        fillMatrix4(m);
         printMatrix3(m);
     }
 
@@ -38,16 +38,32 @@ public class Main {
     public static void printMatrix3(int[][] x) {
         for (int i = 0; i < x.length; i++) {for (int j = 0; j < x[i].length; j++) {System.out.printf("%3d", x[i][j]);}System.out.println();}}
 
-
-
     public static void fillMatrix3(int[][] x) {
         int num = 0; boolean a = true;
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < x[i].length; j++) { if (a) {x[i][j] = num++;} else {x[i][j] = num--;}}
-            if (a) {num--;} else {num++;}
-            num += x[i].length;
-            a = !a;}}
+                if (a) {num--;} else {num++;} num += x[i].length; a = !a;}}
 
+    public static void fillMatrix4(int[][] m) {
+        int xSize = m.length, ySize = m.length, dx = 0, dy = 1;
+        int x = xSize - 1, y = 0;
+        for (int i=xSize * ySize - 1; i > 0; --i) {
+            m[y][x] = i;
+            if (dy == 1 && (y + dy == ySize || m[y + dy][x] != 0)) {
+                dy = 0; dx = -1;
+            }
+            else if (dx == -1 && (x + dx == -1 || m[y][x + dx] != 0)) {
+                dx = 0; dy = -1;
+            }
+            else if (dy == -1 && (y + dy == -1 || m[y + dy][x] != 0)) {
+                dx = 1; dy = 0;
+            }
+            else if (dx == 1 && (x + dx == xSize || m[y][x + dx] != 0)) {
+                dy = 1; dx = 0;
+            }
+            y += dy; x += dx;
+        }
+    }
 
     public static void checkSMatrix(int[][] x) {
         boolean s = true;
