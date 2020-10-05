@@ -8,8 +8,8 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         int y = scan.nextInt(), x = scan.nextInt();;
         int[][] m = new int[y][x];
-        fillMatrix2(m, x, y);
-        printMatrix2(m);
+        fillMatrix3(m);
+        printMatrix3(m);
     }
 
     public static void fillMatrix(int[][] x, Scanner scan) {
@@ -34,6 +34,20 @@ public class Main {
 
     public static void printMatrix2(int[][] x) {
         for (int i = 0; i < x.length; i++) {for (int j = 0; j < x[i].length; j++) {System.out.printf("%4d", x[i][j]);}System.out.println();}}
+
+    public static void printMatrix3(int[][] x) {
+        for (int i = 0; i < x.length; i++) {for (int j = 0; j < x[i].length; j++) {System.out.printf("%3d", x[i][j]);}System.out.println();}}
+
+
+
+    public static void fillMatrix3(int[][] x) {
+        int num = 0; boolean a = true;
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[i].length; j++) { if (a) {x[i][j] = num++;} else {x[i][j] = num--;}}
+            if (a) {num--;} else {num++;}
+            num += x[i].length;
+            a = !a;}}
+
 
     public static void checkSMatrix(int[][] x) {
         boolean s = true;
